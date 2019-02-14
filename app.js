@@ -12,7 +12,7 @@ let model = {
         this.daten.push({vorname:"Neu", nachname:"Neuer"});
     },
     loeschen: function(index){
-        console.log('Lösche ' + index);
+        this.daten.splice(index, 1);
     }
 }
 
@@ -60,6 +60,7 @@ let presenter = {
     },
     loeschen: function(index){
         model.loeschen(index);
+        view.render(model.getAll());
     }
 }
 
