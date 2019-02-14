@@ -1,16 +1,25 @@
 //================ Model =====================
 let model = {
+    // Data
     daten: [
         {vorname: "Anna", nachname: "Arm"},
         {vorname: "Berta", nachname: "Bein"},
         {vorname: "Carla", nachname: "Copf"},
     ],
-    getAll: function(){
-        return this.daten;
-    },
+
+    // CREATE
     neuerDatensatz: function(){
         this.daten.push({vorname:"Neu", nachname:"Neuer"});
     },
+
+    // READ
+    getAll: function(){
+        return this.daten;
+    },
+    
+    // UPDATE
+
+    // DELETE
     loeschen: function(index){
         this.daten.splice(index, 1);
     }
