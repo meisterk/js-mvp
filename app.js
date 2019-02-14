@@ -27,9 +27,18 @@ let view = {
             let textNode = document.createTextNode(daten[i].vorname + " " + daten[i].nachname);
             liNode.setAttribute('data-index', i);
             liNode.appendChild(textNode);
+            liNode.appendChild(this.deleteButton(i));
             ulNode.appendChild(liNode);
         }
         ausgabe.appendChild(ulNode);
+    },
+
+    deleteButton: function(index){
+        let buttonNode = document.createElement('button');
+        let textNode = document.createTextNode('Löschen');
+        buttonNode.appendChild(textNode);
+        buttonNode.setAttribute('data-index', i);
+        return buttonNode;
     }
 }
 
