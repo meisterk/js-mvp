@@ -1,3 +1,6 @@
+(function(){
+    'use strict';
+
 //================ Model =====================
 let model = {
     // Data
@@ -34,7 +37,7 @@ let view = {
         }
            
         let ulNode = document.createElement('ul');
-        for(i=0; i< daten.length; i++){
+        for(let i=0; i< daten.length; i++){
             let liNode = document.createElement('li');
             let textNode = document.createTextNode(daten[i].vorname + " " + daten[i].nachname);
             liNode.setAttribute('data-index', i);
@@ -84,3 +87,5 @@ let presenter = {
 
 //================ Main =====================
 presenter.init();
+
+})();
