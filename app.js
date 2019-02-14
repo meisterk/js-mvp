@@ -59,14 +59,23 @@ let view = {
 
 //================ Presenter =====================
 let presenter = {
+    // INIT
     init: function(){
         this.neuButton = document.getElementById('neu');
         this.neuButton.addEventListener('click', this.neuerDatensatz);
+
+        view.render(model.getAll());
     },
+
+    // CREATE
     neuerDatensatz: function(){
         model.neuerDatensatz();
         view.render(model.getAll());
     },
+
+    // UPDATE
+
+    // DELETE
     loeschen: function(index){
         model.loeschen(index);
         view.render(model.getAll());
@@ -74,5 +83,4 @@ let presenter = {
 }
 
 //================ Main =====================
-view.render(model.getAll());
 presenter.init();
