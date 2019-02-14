@@ -10,6 +10,9 @@ let model = {
     },
     neuerDatensatz: function(){
         this.daten.push({vorname:"Neu", nachname:"Neuer"});
+    },
+    loeschen: function(index){
+        console.log('Lösche ' + index);
     }
 }
 
@@ -28,7 +31,7 @@ let view = {
             liNode.setAttribute('data-index', i);
             liNode.appendChild(textNode);
             liNode.appendChild(this.deleteButton(i));
-            ulNode.appendChild(liNode);
+            ulNode.appendChild(liNode);            
         }
         ausgabe.appendChild(ulNode);
     },
@@ -37,7 +40,10 @@ let view = {
         let buttonNode = document.createElement('button');
         let textNode = document.createTextNode('Löschen');
         buttonNode.appendChild(textNode);
-        buttonNode.setAttribute('data-index', i);
+        buttonNode.setAttribute('data-index', index);
+        buttonNode.addEventListener('click', function(){
+            presenter.loeschen(index)
+        });
         return buttonNode;
     }
 }
@@ -51,6 +57,9 @@ let presenter = {
     neuerDatensatz: function(){
         model.neuerDatensatz();
         view.render(model.getAll());
+    },
+    loeschen: function(index){
+        model.loeschen(index);
     }
 }
 
