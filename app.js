@@ -30,12 +30,16 @@ let model = {
 
 //================ View =====================
 let view = {
-    render: function(daten){
-        let ausgabe = document.getElementById('ausgabe');
-        if(ausgabe.firstChild){
-            ausgabe.removeChild(ausgabe.firstChild);   
+    ausgabeNode: null,
+    init: function(){
+        this.ausgabeNode = document.getElementById('ausgabe');
+    },
+    clear: function(){
+        if(this.ausgabeNode.firstChild){
+            this.ausgabeNode.removeChild(this.ausgabeNode.firstChild);   
         }
-           
+    },
+    render: function(daten){           
         let ulNode = document.createElement('ul');
         for(let i=0; i< daten.length; i++){
             let liNode = document.createElement('li');
@@ -63,10 +67,8 @@ let view = {
 //================ Presenter =====================
 let presenter = {
     // INIT
-    init: function(){
-        this.neuButton = document.getElementById('neu');
-        this.neuButton.addEventListener('click', this.neuerDatensatz);
-
+    init: function(){ 
+        view.init();
         view.render(model.getAll());
     },
 
