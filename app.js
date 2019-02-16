@@ -35,28 +35,55 @@ let view = {
         this.ausgabeNode = document.getElementById('ausgabe');
     },
     clear: function(){
-        if(this.ausgabeNode.firstChild){
-            this.ausgabeNode.removeChild(this.ausgabeNode.firstChild);   
-        }
+        this.ausgabeNode.innerHTML = '';       
     },
-    render: function(daten){           
-        let ulNode = document.createElement('ul');
-        for(let i=0; i< daten.length; i++){
-            let liNode = document.createElement('li');
-            let textNode = document.createTextNode(daten[i].vorname + " " + daten[i].nachname);
-            liNode.setAttribute('data-index', i);
-            liNode.appendChild(textNode);
-            liNode.appendChild(this.deleteButton(i));
-            ulNode.appendChild(liNode);            
-        }
-        ausgabe.appendChild(ulNode);
-    },
+    render: function(daten){
+        // Alles löschen
+        this.clear();
+        
+        // Liste ausgeben
+        let tableNode = document.createElement('table');
+        ausgabe.appendChild(tableNode);
 
+        for(let i=0; i< daten.length; i++){
+            let trNode = document.createElement('tr');
+            tableNode.appendChild(trNode);
+            
+            let tdNode1 = document.createElement('td');
+            trNode.appendChild(tdNode1);
+            let textNode1 = document.createTextNode(daten[i].vorname);
+            tdNode1.appendChild(textNode1);
+            
+
+            let tdNode2 = document.createElement('td');
+            trNode.appendChild(tdNode2);
+            let textNode2 = document.createTextNode(daten[i].nachname);
+            tdNode2.appendChild(textNode2);
+            
+
+            let tdNode3 = document.createElement('td');
+            trNode.appendChild(tdNode3);
+            tdNode3.appendChild(this.deleteButton(i));                    
+        }        
+
+        // Neu-Button
+        ausgabe.appendChild(this.neuButton());
+    },
+    neuButton: function(index){
+        let buttonNode = document.createElement('button');
+        let textNode = document.createTextNode('Neu');
+        buttonNode.appendChild(textNode);
+        buttonNode.setAttribute('class','btn-floating btn-large waves-effect waves-light green');
+        buttonNode.addEventListener('click', function(){
+            presenter.neuerDatensatz();
+        });
+        return buttonNode;
+    },
     deleteButton: function(index){
         let buttonNode = document.createElement('button');
-        let textNode = document.createTextNode('Löschen');
+        let textNode = document.createTextNode('x');
         buttonNode.appendChild(textNode);
-        buttonNode.setAttribute('data-index', index);
+        buttonNode.setAttribute('class','btn-floating red');
         buttonNode.addEventListener('click', function(){
             presenter.loeschen(index)
         });
